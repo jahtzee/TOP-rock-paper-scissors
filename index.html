@@ -4,142 +4,20 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title></title>
-
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="icon" href="images/favicon.png" />
+    <title>Rock, Paper, Scissors</title>
+	<link rel="stylesheet" href="main.css" />
+    <script src="https://kit.fontawesome.com/338ea209e8.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
     <main>
+    	<div id='highlight'>Choose your <span id='highlight'>weapon!</span></div>
+    	<div data-value='rock' class='btn'><i class="far fa-hand-rock"></i></div>
+    	<div data-value='paper' class='btn'><i class="far fa-hand-paper"></i></i></div>
+    	<div data-value='scissors' class='btn'><i class="far fa-hand-scissors"></i></i></div>
+
     </main>
-    <script>
-      let playerSelection;
-      let computerSelection;
-      let playerScore = 0;
-      let computerScore = 0;
-
-      game(5);
-
-      function game(rounds) {
-        for (i = 1; i<rounds; i++) {
-          playerSelection = playerPlay();
-          computerSelection = computerPlay();
-          let roundResult = singleRound(playerSelection, computerSelection);
-          scoreTracker(roundResult);
-          resultAlert(roundResult);
-        }
-
-        announce(playerScore, computerScore);
-      }
-
-      function announce(playerScore, computerScore) {
-        if (playerScore > computerScore) {
-          alert("You win the game!");
-        }
-        else if (playerScore < computerScore) {
-          alert("You lost the game!");
-        }
-        else {
-          alert("The game ended in a draw!");
-        }
-      }
-
-      function scoreTracker(result) {
-        switch (result) {
-          case "win":
-            playerScore += 1;
-            return 1;
-          case "loss":
-            computerScore += 1;
-            return 2;
-        }
-        return 3;
-      }
-
-      function resultAlert(result) {
-        switch (result) {
-          case "win":
-            alert("You win!"+" "+playerSelection+" beats "+computerSelection+"!");
-            break;
-          case "loss":
-            alert("You lose!"+" "+computerSelection+" beats "+playerSelection+"!");
-            break;
-          case "draw":
-            alert("Draw! The computer chose "+computerSelection+"!");
-        }
-        alert("Your current score: "+playerScore+"\nComputer score: "+computerScore);
-      }
-
-      function singleRound(playerSelection, computerSelection) {
-        let logic = {
-          rock: {
-            win: "scissors", 
-            loss: "paper"
-          },
-          paper: {
-            win: "rock",
-            loss: "scissors"
-          },
-          scissors: {
-            win: "paper",
-            loss: "rock"
-          }          
-        }
-
-        if (logic[playerSelection].win === computerSelection) {
-          return "win";
-        }
-        else if (logic[playerSelection].loss === computerSelection) {
-          return "loss";
-        }
-        else {
-          return "draw";
-        }
-      }
-
-      function playerPlay() {
-        let check = false
-        let choice
-        while (check === false) {
-          choice = prompt("Make your move!", "Rock/Paper/Scissors");
-
-          if (choice !== null) {
-            choice = choice.toLowerCase();
-          }else {
-            throw new Error("Something went wrong.");
-          }
-
-          switch (choice) {
-            case "rock":
-            case "paper":
-            case "scissors":
-              check = true;
-              break;
-            default:
-              alert("Please enter 'Rock', 'Paper' or 'Scissors'!")
-          }
-        }
-        return choice;
-      }
-      
-      function computerPlay() {
-        let choice = getRandomInt(3);
-        switch (choice) {
-          case 0:
-            return "rock";
-          case 1:
-            return "paper";
-          case 2:
-            return "scissors";
-        }
-      }
-
-      function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-      }
-
-    </script>
   </body>
+
+  <script src='rps.js'></script>
 </html>
